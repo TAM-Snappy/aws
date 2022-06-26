@@ -7,13 +7,13 @@ ippublic=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=DOKEVAX-PR
 echo $ippublic
 
 
-echo "$(ssh $sshopts ubuntu@$ippublic 'sudo mysql -e "use sample; show tables \G" | grep "Tables" | cut -d " " -f2')"
-exit 0
-
-
 while IFS= read -r table; do
 
 echo "Vérification de la table - $table"
+
+continue
+
+
 nas="/mnt/nasdata/tables/$table/"
 repbkp=$(ls $nas -t | head -n 1)
 lastbkp=$(ls $nas"$repbkp")
