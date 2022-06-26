@@ -7,6 +7,7 @@ ippublic=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=DOKEVAX-PR
 echo $ippublic
 
 
+echo "$(ssh $sshopts ubuntu@$ippublic 'sudo mysql -e "use sample; show tables \G" | grep "Tables" | cut -d " " -f2')"
 
 while IFS= read -r table; do
 
