@@ -46,20 +46,20 @@ else
 
 
 	nb_ligne1=$(cat $table.sql | wc -l)
-	
-    nb_ligne2=$(cat "$nas$repbkp/$lastbkp" | wc -l)
-	
+	echo "debut 2"
+    	nb_ligne2=$(cat "$nas$repbkp/$lastbkp" | wc -l)
+	echo "debut 3"
 	var1=$(($nb_ligne1 - 1))
-
+	echo "debut 4"
 	head -n $var1 $table.sql > save_${table}1.sql
-
+	echo "debut 5"
 	var2=$(($nb_ligne2 - 1))
-
+	echo "debut 6"
 	head -n $var2 "$nas$repbkp/$lastbkp" > save_${lastbkp}2.sql
-	
+	echo "debut 7"
 	sv1=$(md5sum save_${table}1.sql | cut -d ' ' -f1)
 	sv2=$(md5sum save_${lastbkp}2.sql | cut -d ' ' -f1)
-	
+	echo "debut 8"
 
 	if [[ $sv1 == $sv2 ]]; then
 
