@@ -61,15 +61,15 @@ else
 	sv2=$(md5sum save_${lastbkp}2.sql | cut -d ' ' -f1)
 	
 
-	if [ "$sv1" == "$sv2" ]; then
+	if [[ $sv1 == $sv2 ]]; then
 
-		echo "aucune nouvelle modification sur la bdd"
+		echo "aucune nouvelle modification sur la table - $table"
 
 	else
 
 		#DEPLACEMENT DANS LE NAS
 		
-		echo "modification detecté sur la bdd"
+		echo "modification detecté sur la table - $table"
 		mkdir -p $nas"$(date)" 
 		cp sample.sql $nas"$(date)/$table.sql" 
 		echo "sauvegarde de la table - $table terminée"
@@ -80,5 +80,5 @@ else
 fi
 
 
-done < <(ssh $sshopts ubuntu@$ippublic 'sudo mysql -e "use sample; show tables \G" | grep "Tables" | cut -d " " -f2')
+done < <(ssh $sshopts ubuntu@$ippublic 'sudo mysql -e "use sample; show tables \G" | grep "Tables" | cut -d " " -f2' < /dev/null)
 
