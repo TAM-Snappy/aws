@@ -23,7 +23,9 @@ while IFS= read -r table; do
 	ssh $sshopts ubuntu@$ippublic 'sudo mysqldump sample $table < /dev/null > $table.sql'
 
 	sleep 10
-
+	echo "debut sleep"
+	continue
+	
 	scp $sshopts ubuntu@$ippublic:/home/ubuntu/$table.sql . < /dev/null
 
 
