@@ -17,7 +17,7 @@ lastbkp=$(ls $nas"$repbkp")
 
 
 #DUMP DE BD
-ssh $sshopts ubuntu@$ippublic "sudo mysqldump sample $table < /dev/null > $table.sql"
+ssh $sshopts ubuntu@$ippublic 'sudo mysqldump sample $table < /dev/null > $table.sql'
 
 sleep 10
 
