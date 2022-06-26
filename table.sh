@@ -28,7 +28,9 @@ while IFS= read -r table; do
 
 
 	echo "debug 1"
-
+	continue
+	
+	
 	if ! [ -d $nas ]; then
        
     
@@ -64,7 +66,7 @@ while IFS= read -r table; do
 		if [[ $sv1 == $sv2 ]]; then
 
 			echo "aucune nouvelle modification sur la table - $table"
-			continue
+			
 
 		else
 
