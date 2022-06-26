@@ -8,6 +8,8 @@ echo $ippublic
 
 
 echo "$(ssh $sshopts ubuntu@$ippublic 'sudo mysql -e "use sample; show tables \G" | grep "Tables" | cut -d " " -f2')"
+exit 0
+
 
 while IFS= read -r table; do
 
