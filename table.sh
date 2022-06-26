@@ -11,7 +11,6 @@ while IFS= read -r table; do
 
 echo "Vérification de la table - $table"
 
-continue
 
 
 nas="/mnt/nasdata/tables/$table/"
@@ -20,6 +19,7 @@ lastbkp=$(ls $nas"$repbkp")
 
 
 #DUMP DE BD
+echo "debug 0"
 ssh $sshopts ubuntu@$ippublic 'sudo mysqldump sample $table < /dev/null > $table.sql'
 
 sleep 10
@@ -27,6 +27,7 @@ sleep 10
 scp $sshopts ubuntu@$ippublic:/home/ubuntu/$table.sql . < /dev/null
 
 
+echo "debug 1"
 
 if ! [ -d $nas ]; then
        
@@ -75,9 +76,9 @@ else
 
 	fi
     
-   echo "debug 0"
+   
 fi
 
-echo "debug 1"
+
 done < <(ssh $sshopts ubuntu@$ippublic 'sudo mysql -e "use sample; show tables \G" | grep "Tables" | cut -d " " -f2')
 
